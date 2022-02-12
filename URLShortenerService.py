@@ -1,6 +1,7 @@
 import http.server
 import requests
 from urllib.parse import quote, parse_qs, urlparse
+import os
 
 url_dictionary = {}
 
@@ -79,6 +80,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             url_dictionary[quote(short_url[0])] = long_url[0] # Quote before saving so it can be used as a short url
 
 if __name__ == '__main__':
-    server_address = ('', 8000)
+    port = int(os.environ.get('PORT', 8000))
+    server_address = ('', port)
     httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
