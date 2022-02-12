@@ -82,5 +82,5 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
-    httpd = http.server.HTTPServer(server_address, Shortener)
-    httpd.serve_forever()
+    server = http.server.ThreadingHTTPServer(server_address, Shortener)
+    server.serve_forever()
